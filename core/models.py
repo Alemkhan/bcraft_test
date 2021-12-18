@@ -1,0 +1,10 @@
+from django.db import models
+
+
+class BaseModel(models.Model):
+    class Meta:
+        abstract = True
+
+    is_deleted = models.BooleanField(default=False)
+    created_on = models.DateTimeField(auto_now_add=True)
+    modified_on = models.DateTimeField(auto_now=True)
