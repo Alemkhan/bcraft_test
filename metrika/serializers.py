@@ -18,7 +18,13 @@ class StatisticsGetSerializes(serializers.ModelSerializer):
     cpm = serializers.SerializerMethodField()
 
     def get_cpc(self, obj):
-        return obj.cost / obj.clicks
+        try:
+            return obj.cost / obj.clicks
+        except TypeError:
+            return "Not available"
 
     def get_cpm(self, obj):
-        return obj.cost / obj.views * 1000
+        try:
+            return obj.cost / obj.views * 1000
+        except TypeError:
+            return "Not available"
