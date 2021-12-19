@@ -12,5 +12,6 @@ class Statistics(BaseModel):
                                         null=True, blank=True)
     clicks = models.PositiveIntegerField(verbose_name="Клики",
                                          null=True, blank=True)
-    cost = models.DecimalField(decimal_places=2, verbose_name="Цена",
+    cost = models.DecimalField(max_digits=10, decimal_places=2,
+                               verbose_name="Цена",
                                null=True, blank=True)
