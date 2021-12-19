@@ -13,7 +13,6 @@ class StatisticsListView(ListAPIView):
     def get(self, request, *args, **kwargs):
         sort_param = self.request.query_params.get('sort')
         queryset = self.filter_queryset(self.get_queryset())
-
         serializer = self.get_serializer(queryset, many=True).data
         if sort_param:
             is_reversed = False
@@ -29,10 +28,9 @@ class StatisticsListView(ListAPIView):
         to_date = self.request.query_params.get('to_date')
         lookup = Q(is_deleted=False)
         if from_date:
-            lookup = lookup | Q(date__gte=from_date)
+            lookup = lookup & Q(date__gte=from_date)
         if to_date:
-            lookup = lookup | Q(date__lte=to_date)
-
+            lookup = lookup & Q(date__lte=to_date)
         queryset = Statistics.objects.filter(lookup)
         return queryset
 
